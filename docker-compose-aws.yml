@@ -1,6 +1,6 @@
---- 
+---
 services:
-  shopizer-db: 
+  shopizer-db:
     environment:
       - MYSQL_ROOT_PASSWORD=shopizer123
       - MYSQL_DATABASE=SALESMANAGER
@@ -10,14 +10,14 @@ services:
     container_name: shopizer-db
     networks:
       - shopizer-network
-    ports: 
+    ports:
       - "3307:3306"
-    volumes: 
+    volumes:
       - ./db:/var/lib/mysql
-  shopizer: 
-    depends_on: 
+  shopizer:
+    depends_on:
       - shopizer-db
-    environment: 
+    environment:
       - "SPRING_PROFILES_ACTIVE=cloud"
       - "JAVA_OPTS=-Xms1024m -Xmx1024m"
       - "elasticsearch.server.host=http://shopizer-es"
@@ -33,22 +33,22 @@ services:
       - "config.cms.aws.region=ca-central-1"
       - "elasticsearch.security.password=NOTREQUIRED"
       - "GOOGLE_APPLICATION_CREDENTIALS=NO"
-      - "config.cms.gcp.bucket=NO
+      - "config.cms.gcp.bucket=NO"
       - "config.displayShipping=true"
       - "config.googleMapsKey=GOOGLE-MAPS-API-KEY"
-      - "config.recaptcha.secretKey=RECAPTCHA-SECRET-KET"
-      - "config.recaptcha.siteKey=RECAPTCHA-SITE-KEY
+      - "config.recaptcha.secretKey=RECAPTCHA-SECRET-KEY"
+      - "config.recaptcha.siteKey=RECAPTCHA-SITE-KEY"
     image: shopizerecomm/shopizer:master-1573694054
     container_name: shopizer
     mem_limit: 1024m
     networks:
       - shopizer-network
-    links: 
+    links:
       - shopizer-db
-    ports: 
+    ports:
       - "8080:8080"
-  shopizer-es: 
-    environment: 
+  shopizer-es:
+    environment:
       - "cluster.name=shopizer"
       - "bootstrap.memory_lock=true"
       - "discovery.type=single-node"
@@ -58,10 +58,10 @@ services:
     networks:
       - shopizer-network
     mem_limit: 1g
-    ports: 
+    ports:
       - "9200:9200"
-    ulimits: 
-      memlock: 
+    ulimits:
+      memlock:
         hard: -1
         soft: -1
     volumes:
