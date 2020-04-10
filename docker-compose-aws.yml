@@ -44,7 +44,7 @@ services:
       - "config.emailSender.region=US_EAST_1"
     image: shopizerecomm/shopizer:latest
     container_name: shopizer
-    mem_limit: 1024m
+    mem_limit: 2048m
     networks:
       - shopizer-network
     links: 
