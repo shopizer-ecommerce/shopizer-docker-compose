@@ -17,27 +17,32 @@ services:
   shopizer: 
     depends_on: 
       - shopizer-db
-    environment: 
-      - "SPRING_PROFILES_ACTIVE=cloud"
-      - "JAVA_OPTS=-Xms1024m -Xmx1024m"
+    environment:
+      - "AWS_ACCESS_KEY_ID=AWS-ACCESS-KEY"
+      - "AWS_SECRET_ACCESS_KEY=AWS-SECRET-ACCESS-KEY"
+      - "config.cms.aws.bucket=shopizer-bucket"
+      - "config.cms.aws.region=ca-central-1"
+      - "config.cms.gcp.bucket=NO"
+      - "config.cms.method=aws"
+      - "config.cms.contentUrl=https://s3.ca-central-1.amazonaws.com/shopizer-bucket"
+      - "config.displayShipping=true"
+      - "config.emailSender=ses"
+      - "config.emailSender.region=ca-central-1"
+      - "config.googleMapsKey=GOOGLE-MAPS-API-KEY"
+      - "config.recaptcha.secretKey=RECAPTCHA-SECRET-KET"
+      - "config.recaptcha.siteKey=RECAPTCHA-SITE-KEY"
+      - "config.shippingDistancePreProcessor.apiKey=NO"
+      - "config.shippingDistancePreProcessor.acceptedZones=NO"
+      - "config.shipping.rule.shippingModuleDecision=ShippingDecision.drl"
+      - "config.shipping.rule.priceByDistance=PriceByDistance.drl"
       - "elasticsearch.server.host=http://shopizer-es"
       - "elasticsearch.server.port=9200"
       - "db.jdbcUrl=jdbc:mysql://shopizer-db:3306/SALESMANAGER?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8"
       - "db.user=shopizer_db_user"
       - "db.password=shopizer_db_password"
-      - "config.cms.method=aws"
-      - "config.cms.contentUrl=https://s3.ca-central-1.amazonaws.com/shopizer-bucket"
-      - "AWS_ACCESS_KEY_ID=AWS-ACCESS-KEY"
-      - "AWS_SECRET_ACCESS_KEY=AWS-SECRET-ACCESS-KEY"
-      - "config.cms.aws.bucket=shopizer-bucket"
-      - "config.cms.aws.region=ca-central-1"
       - "elasticsearch.security.password=NOTREQUIRED"
-      - "GOOGLE_APPLICATION_CREDENTIALS=NO"
-      - "config.cms.gcp.bucket=NO
-      - "config.displayShipping=true"
-      - "config.googleMapsKey=GOOGLE-MAPS-API-KEY"
-      - "config.recaptcha.secretKey=RECAPTCHA-SECRET-KET"
-      - "config.recaptcha.siteKey=RECAPTCHA-SITE-KEY
+      - "SPRING_PROFILES_ACTIVE=cloud"
+      - "JAVA_OPTS=-Xms2048m -Xmx2048m"
     image: shopizerecomm/shopizer:master-1573694054
     container_name: shopizer
     mem_limit: 1024m

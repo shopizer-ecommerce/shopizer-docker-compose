@@ -20,7 +20,7 @@ services:
     environment: 
       - "SPRING_PROFILES_ACTIVE=cloud"
       - "JAVA_OPTS=-Xms1024m -Xmx1024m"
-      - "elasticsearch.server.host=http://shopizer-es"
+      - "elasticsearch.server.host=http:shopizer-es"
       - "elasticsearch.server.port=9200"
       - "db.jdbcUrl=jdbc:mysql://shopizer-db:3306/SALESMANAGER?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8"
       - "db.user=shopizer_db_user"
