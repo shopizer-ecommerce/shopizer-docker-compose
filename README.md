@@ -24,6 +24,10 @@ Change firewall rules
 - add Custom TCP port 8080
 
 Download [docker-compose.yml](https://github.com/shopizer-ecommerce/shopizer-aws-lightsail/blob/master/docker-compose.yml)
+```sh
+curl -LJO https://raw.githubusercontent.com/shopizer-ecommerce/shopizer-docker-compose/master/docker-compose-aws.yml
+mv docker-compose-aws.yml docker-compose.yml
+```
 
 cd to folder containing newly download pem file
 ```sh
