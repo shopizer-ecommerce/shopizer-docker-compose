@@ -38,6 +38,8 @@ services:
       - "config.googleMapsKey=YOUR-GOOGLE-MAPS-KEY"
       - "config.recaptcha.secretKey=YOUR-RECAPTCHA-SECRET"
       - "config.recaptcha.siteKey=YOUR-RECAPTCHA-SITEKEY"
+      - "config.shipping.rule.priceByDistance=PriceByDistance.drl"
+      - "config.shipping.rule.shippingModuleDecision=ShippingDecision.drl"
       - "config.shippingDistancePreProcessor.acceptedZones=QC,ON,NB,NY,CA,FL,NC,SC"
       - "config.shippingDistancePreProcessor.apiKey=YOUR-GOOGLE-PLACES-KEY"
       - "config.emailSender=ses"
