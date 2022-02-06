@@ -1,0 +1,37 @@
+--- 
+services:
+  shopizer: 
+    image: shopizerecomm/shopizer:3.0.0
+    container_name: shopizer
+    environment:
+    - "config.cms.contentUrl=http://localhost:8080"
+    mem_limit: 2048m
+    networks:
+      - shopizer-network
+    ports: 
+      - "8080:8080"
+    #volumes:
+    #  - files:/sm-shop
+  shopizer-admin:
+    image: shopizerecomm/shopizer-admin:latest
+    container_name: shopizer-admin
+    environment: 
+    - "APP_BASE_URL=http://localhost:8080/api"
+    networks:
+      - shopizer-network
+    ports: 
+      - "4200:80"
+  shopizer-shop: 
+    image: shopizerecomm/shopizer-shop-reactjs:latest
+    container_name: shopizer-shop
+    environment: 
+    - "APP_MERCHANT=DEFAULT"
+    - "APP_BASE_URL=http://localhost:8080"
+    networks:
+      - shopizer-network
+    ports: 
+      - "80:80"
+version: "2.2"
+
+networks:
+  shopizer-network:

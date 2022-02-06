@@ -1,13 +1,39 @@
 --- 
 services:
-  shopizer: 
+  shopizer-db: 
+    environment:
+      - MYSQL_ROOT_PASSWORD=shopizer123
+      - MYSQL_DATABASE=SALESMANAGER
+      - MYSQL_USER=shopizer_db_user
+      - MYSQL_PASSWORD=shopizer_db_password
+    image: mysql/mysql-server:8.0.28
+    container_name: shopizer-db
+    networks:
+      - shopizer-network
+    ports: 
+      - "3307:3306"
+    volumes: 
+      - ./db:/var/lib/mysql
+  shopizer:
+    depends_on: 
+      - shopizer-db 
     image: shopizerecomm/shopizer:3.0.0
     container_name: shopizer
     environment:
+    - "SPRING_PROFILES_ACTIVE=mysql"
+    - "db.jdbcUrl=jdbc:mysql://shopizer-db:3306/SALESMANAGER?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8"
+    - "db.user=shopizer_db_user"
+    - "db.password=shopizer_db_password"
+    - "elasticsearch.security.password=NOTREQUIRED"
     - "config.cms.contentUrl=http://localhost:8080"
+    - "config.cms.method=default"
+    - "elasticsearch.server.host=http://localhost"
+    - "elasticsearch.server.port=9200"
     mem_limit: 2048m
     networks:
       - shopizer-network
+    links: 
+      - shopizer-db
     ports: 
       - "8080:8080"
     #volumes:
