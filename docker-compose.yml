@@ -13,11 +13,12 @@ services:
     ports: 
       - "3307:3306"
     volumes: 
-      - ./db:/var/lib/mysql
+      - $PWD/db:/var/lib/mysql
+  #Infinispan image management
   shopizer:
     depends_on: 
       - shopizer-db 
-    image: shopizerecomm/shopizer:3.0.0
+    image: shopizerecomm/shopizer:latest
     container_name: shopizer
     environment:
     - "SPRING_PROFILES_ACTIVE=mysql"
@@ -36,8 +37,8 @@ services:
       - shopizer-db
     ports: 
       - "8080:8080"
-    #volumes:
-    #  - files:/sm-shop
+    volumes:
+      - $PWD/files:/files
   shopizer-admin:
     image: shopizerecomm/shopizer-admin:latest
     container_name: shopizer-admin
