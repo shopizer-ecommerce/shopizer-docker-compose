@@ -2,6 +2,8 @@
 # docker-compose aws
 # docker-compose-gcp
 
+# docker rm -fv $(docker ps -aq)
+
 Shopizer running on AWS Lightsail, the easiest way to quickstart an instance of Shopizer on AWS
 
   - In AWS Console
