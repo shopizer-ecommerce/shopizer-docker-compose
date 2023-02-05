@@ -60,6 +60,7 @@ services:
       - "config.emailSender=ses"
       - "config.emailSender.region=US_EAST_1"
     image: shopizerecomm/shopizer:3.2.5
+    pull_policy: always
     container_name: shopizer
     mem_limit: 2048m
     networks:
@@ -134,6 +135,13 @@ services:
       - 'OPENSEARCH_HOSTS=["http://opensearch-node1:9200","http://opensearch-node2:9200"]'
     networks:
       - shopizer-network
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 300 --scope shopizer
+    labels:
+      - "com.centurylinklabs.watchtower.scope=shopizer"
 
 volumes:
   opensearch-data1:
